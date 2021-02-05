@@ -8,7 +8,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 /*
- * Copyright (c) 2021. Cronu
+ * Copyright (c) 2021. Cronuside
  */
 
 public class PersistentDataUtils {
