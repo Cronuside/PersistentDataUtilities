@@ -92,7 +92,7 @@ public class PersistentDataUtils {
     public void addPlayerDataInteger(NamespacedKey key, Player player, int value) {
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         if (!playerData.has(key, PersistentDataType.INTEGER)){
-            addPlayerDataInteger(key, player, 0);
+            setPlayerDataInteger(key, player, 0);
         }
         int finalValue = playerData.get(key, PersistentDataType.INTEGER) + value;
         setPlayerDataInteger(key, player, finalValue);
