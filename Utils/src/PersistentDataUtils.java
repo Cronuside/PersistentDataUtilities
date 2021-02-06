@@ -1,5 +1,3 @@
-package dev.cronuside.blockstation.utils.menu;
-
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -11,45 +9,51 @@ import org.bukkit.persistence.PersistentDataType;
  * Copyright (c) 2021. Cronuside
  */
 
-public class PersistentDataUtils {
+public class PersistentDataUtilities {
 
-    public boolean itemDataContainsKey(NamespacedKey key, ItemStack item){
+    private NamespacedKey key;
+    
+    PersistentDataUtilities(NamespacedKey key){
+        this.key = key;
+    }
+    
+    public boolean itemDataContainsKey(ItemStack item){
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer itemData = meta.getPersistentDataContainer();
         return itemData.getKeys().contains(key);
     }
 
-    public boolean playerDataContainsKey(NamespacedKey key, Player player){
+    public boolean playerDataContainsKey(Player player){
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         return playerData.getKeys().contains(key);
     }
 
-    public void setPlayerDataInteger(NamespacedKey key, Player player, int value) {
+    public void setPlayerDataInteger(Player player, int value) {
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         playerData.set(key, PersistentDataType.INTEGER, value);
     }
 
-    public void setPlayerDataDouble(NamespacedKey key, Player player, double value) {
+    public void setPlayerDataDouble(Player player, double value) {
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         playerData.set(key, PersistentDataType.DOUBLE, value);
     }
 
-    public void setPlayerDataString(NamespacedKey key, Player player, String value) {
+    public void setPlayerDataString(Player player, String value) {
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         playerData.set(key, PersistentDataType.STRING, value);
     }
 
-    public void setPlayerDataLong(NamespacedKey key, Player player, long value) {
+    public void setPlayerDataLong(Player player, long value) {
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         playerData.set(key, PersistentDataType.LONG, value);
     }
 
-    public void setPlayerDataFloat(NamespacedKey key, Player player, float value) {
+    public void setPlayerDataFloat(Player player, float value) {
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         playerData.set(key, PersistentDataType.FLOAT, value);
     }
 
-    public int getPlayerDataInteger(NamespacedKey key, Player player) {
+    public int getPlayerDataInteger(Player player) {
         int value = 0;
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         if (playerData.has(key, PersistentDataType.INTEGER))
@@ -57,7 +61,7 @@ public class PersistentDataUtils {
         return value;
     }
 
-    public double getPlayerDataDouble(NamespacedKey key, Player player) {
+    public double getPlayerDataDouble(Player player) {
         double value = 0D;
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         if (playerData.has(key, PersistentDataType.DOUBLE))
@@ -65,7 +69,7 @@ public class PersistentDataUtils {
         return value;
     }
 
-    public String getPlayerDataString(NamespacedKey key, Player player) {
+    public String getPlayerDataString(Player player) {
         String value = null;
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         if (playerData.has(key, PersistentDataType.STRING))
@@ -73,7 +77,7 @@ public class PersistentDataUtils {
         return value;
     }
 
-    public float getPlayerDataFloat(NamespacedKey key, Player player) {
+    public float getPlayerDataFloat(Player player) {
         float value = 0f;
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         if (playerData.has(key, PersistentDataType.FLOAT))
@@ -81,7 +85,7 @@ public class PersistentDataUtils {
         return value;
     }
 
-    public long getPlayerDataLong(NamespacedKey key, Player player) {
+    public long getPlayerDataLong(Player player) {
         long value = 0L;
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         if (playerData.has(key, PersistentDataType.LONG))
@@ -89,43 +93,43 @@ public class PersistentDataUtils {
         return value;
     }
 
-    public void addPlayerDataInteger(NamespacedKey key, Player player, int value) {
+    public void addPlayerDataInteger(Player player, int value) {
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         if (!playerData.has(key, PersistentDataType.INTEGER)){
-            setPlayerDataInteger(key, player, 0);
+            setPlayerDataInteger(player, 0);
         }
         int finalValue = playerData.get(key, PersistentDataType.INTEGER) + value;
-        setPlayerDataInteger(key, player, finalValue);
+        setPlayerDataInteger(player, finalValue);
     }
 
-    public void addPlayerDataDouble(NamespacedKey key, Player player, double value) {
+    public void addPlayerDataDouble(Player player, double value) {
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         if (!playerData.has(key, PersistentDataType.DOUBLE)){
-            setPlayerDataDouble(key, player, 0D);
+            setPlayerDataDouble(player, 0D);
         }
         double finalValue = playerData.get(key, PersistentDataType.DOUBLE) + value;
-        setPlayerDataDouble(key, player, finalValue);
+        setPlayerDataDouble(player, finalValue);
     }
 
-    public void addPlayerDataLong(NamespacedKey key, Player player, long value) {
+    public void addPlayerDataLong(Player player, long value) {
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         if (!playerData.has(key, PersistentDataType.LONG)){
-            setPlayerDataLong(key, player, 0L);
+            setPlayerDataLong(player, 0L);
         }
         long finalValue = playerData.get(key, PersistentDataType.LONG) + value;
-        setPlayerDataLong(key, player, finalValue);
+        setPlayerDataLong(player, finalValue);
     }
 
-    public void addPlayerDataFloat(NamespacedKey key, Player player, float value) {
+    public void addPlayerDataFloat(Player player, float value) {
         PersistentDataContainer playerData = player.getPersistentDataContainer();
         if (!playerData.has(key, PersistentDataType.FLOAT)){
-            setPlayerDataFloat(key, player, 0F);
+            setPlayerDataFloat(player, 0F);
         }
         float finalValue = playerData.get(key, PersistentDataType.FLOAT) + value;
-        setPlayerDataFloat(key, player, finalValue);
+        setPlayerDataFloat(player, finalValue);
     }
 
-    public void setItemDataInteger(NamespacedKey key, ItemStack item, int value) {
+    public void setItemDataInteger(ItemStack item, int value) {
         if (!item.hasItemMeta()) return;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
@@ -133,7 +137,7 @@ public class PersistentDataUtils {
         item.setItemMeta(meta);
     }
 
-    public void setItemDataDouble(NamespacedKey key, ItemStack item, double value) {
+    public void setItemDataDouble(ItemStack item, double value) {
         if (!item.hasItemMeta()) return;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
@@ -141,7 +145,7 @@ public class PersistentDataUtils {
         item.setItemMeta(meta);
     }
 
-    public void setItemDataString(NamespacedKey key, ItemStack item, String value) {
+    public void setItemDataString(ItemStack item, String value) {
         if (!item.hasItemMeta()) return;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
@@ -149,7 +153,7 @@ public class PersistentDataUtils {
         item.setItemMeta(meta);
     }
 
-    public void setItemDataLong(NamespacedKey key, ItemStack item, long value) {
+    public void setItemDataLong(ItemStack item, long value) {
         if (!item.hasItemMeta()) return;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
@@ -157,7 +161,7 @@ public class PersistentDataUtils {
         item.setItemMeta(meta);
     }
 
-    public void setItemDataFloat(NamespacedKey key, ItemStack item, float value) {
+    public void setItemDataFloat(ItemStack item, float value) {
         if (!item.hasItemMeta()) return;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
@@ -165,7 +169,7 @@ public class PersistentDataUtils {
         item.setItemMeta(meta);
     }
 
-    public int getItemDataInteger(NamespacedKey key, ItemStack item) {
+    public int getItemDataInteger(ItemStack item) {
         int value = 0;
         if (!item.hasItemMeta()) return 0;
         ItemMeta meta = item.getItemMeta();
@@ -175,7 +179,7 @@ public class PersistentDataUtils {
         return value;
     }
 
-    public double getItemDataDouble(NamespacedKey key, ItemStack item) {
+    public double getItemDataDouble(ItemStack item) {
         double value = 0D;
         if (!item.hasItemMeta()) return 0D;
         ItemMeta meta = item.getItemMeta();
@@ -185,7 +189,7 @@ public class PersistentDataUtils {
         return value;
     }
 
-    public String getItemDataString(NamespacedKey key, ItemStack item) {
+    public String getItemDataString(ItemStack item) {
         String value = null;
         if (!item.hasItemMeta()) return null;
         ItemMeta meta = item.getItemMeta();
@@ -195,7 +199,7 @@ public class PersistentDataUtils {
         return value;
     }
 
-    public float getItemDataFloat(NamespacedKey key, ItemStack item) {
+    public float getItemDataFloat(ItemStack item) {
         float value = 0f;
         if (!item.hasItemMeta()) return 0f;
         ItemMeta meta = item.getItemMeta();
@@ -205,7 +209,7 @@ public class PersistentDataUtils {
         return value;
     }
 
-    public long getItemDataLong(NamespacedKey key, ItemStack item) {
+    public long getItemDataLong(ItemStack item) {
         long value = 0L;
         if (!item.hasItemMeta()) return 0L;
         ItemMeta meta = item.getItemMeta();
@@ -215,43 +219,43 @@ public class PersistentDataUtils {
         return value;
     }
 
-    public void addItemDataInteger(NamespacedKey key, ItemStack item, int value) {
+    public void addItemDataInteger(ItemStack item, int value) {
         if (!item.hasItemMeta()) return;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
         if (!ItemData.has(key, PersistentDataType.INTEGER)) return;
         int finalValue = ItemData.get(key, PersistentDataType.INTEGER) + value;
-        setItemDataInteger(key, item, finalValue);
+        setItemDataInteger(item, finalValue);
         item.setItemMeta(meta);
     }
 
-    public void addItemDataDouble(NamespacedKey key, ItemStack item, double value) {
+    public void addItemDataDouble(ItemStack item, double value) {
         if (!item.hasItemMeta()) return;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
         if (!ItemData.has(key, PersistentDataType.DOUBLE)) return;
         double finalValue = ItemData.get(key, PersistentDataType.DOUBLE) + value;
-        setItemDataDouble(key, item, finalValue);
+        setItemDataDouble(item, finalValue);
         item.setItemMeta(meta);
     }
 
-    public void addItemDataLong(NamespacedKey key, ItemStack item, long value) {
+    public void addItemDataLong(ItemStack item, long value) {
         if (!item.hasItemMeta()) return;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
         if (!ItemData.has(key, PersistentDataType.LONG)) return;
         long finalValue = ItemData.get(key, PersistentDataType.LONG) + value;
-        setItemDataLong(key, item, finalValue);
+        setItemDataLong(item, finalValue);
         item.setItemMeta(meta);
     }
 
-    public void addItemDataFloat(NamespacedKey key, ItemStack item, float value) {
+    public void addItemDataFloat(ItemStack item, float value) {
         if (!item.hasItemMeta()) return;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
         if (!ItemData.has(key, PersistentDataType.FLOAT)) return;
         float finalValue = ItemData.get(key, PersistentDataType.FLOAT) + value;
-        setItemDataFloat(key, item, finalValue);
+        setItemDataFloat(item, finalValue);
         item.setItemMeta(meta);
     }
 
